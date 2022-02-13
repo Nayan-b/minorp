@@ -1,0 +1,13 @@
+.navbar {
+    background:transparent;
+    padding-top:0;
+    padding-bottom:0;
+    color:#fff;
+    border-radius:0;
+    box-shadow:none;
+    border:none;
+  }
+  .navbar .navbar-brand {
+    font-weight:bold;
+    color:inherit;
+  }
