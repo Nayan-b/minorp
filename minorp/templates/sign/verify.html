@@ -1,0 +1,36 @@
+{% extends './sign.html' %}
+{% load static %}
+{% block body %}
+<!-- create a body to upload image and save in django database sqlite -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Upload Signature</h1>
+            <img src="{% static 'sign/signature.jpg' %}" alt="signature" class="img-thumbnail">
+            <form action="{% url 'verify'%}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <br><br>
+    {% if imagefile %}
+    {% if Verification %}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>Your signature is verified.</p>
+        <p class="mb-0">You can now proceed to the next step.</p>
+        {{imagefile}}
+    </div>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Oh snap!</h4>
+        <p>Your signature is not verified.</p>
+        <p class="mb-0">Please try again.</p>
+        {{imagefile}}
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

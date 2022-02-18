@@ -7,19 +7,20 @@
         <div class="col-md-6">
             <h1>Upload Signature</h1>
             <img src="{% static 'sign/signature.jpg' %}" alt="signature" class="img-thumbnail">
-            <form action="{% url 'upload'%}" method="POST">
+            <form action="{% url 'upload' %}" method="POST">
                 {% csrf_token %}
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="exampleFormControlFile1">Upload Signature</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
                 </div>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary">Upload</button> -->
                 {{form.as_p}}
+                <input type="submit" value="Submit">
             </form>
         </div>
-        <br><br>
+        <!-- <br><br>
         <img src='{{ MEDIA_URL }}{{ imagefile }}'>
-        <br><br>
+        <br><br> -->
     </div>
 
 

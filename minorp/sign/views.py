@@ -8,30 +8,45 @@ def home(request):
     return render(request, 'sign/sign.html')
 
 
-def upload(request):
-    if request.method == 'POST':
-        print(request.POST)
-        print(request.FILES)
-    else:
-        return render(request, 'sign/upload.html')
-
-
 def verify(request):
-    return render(request, 'sign/verify.html')
-
-
-def showimage(request):
-
-    lastimage = Image.objects.last()
+    verification = False
     imagefile = None
-    # imagefile= lastimage.imagefile
-    form = ImageForm()
-    if request.method == 'POST':
-        form = ImageForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            form.save()
+    form = ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        imagefile = form.cleaned_data['imagefile']
+        name = form.cleaned_data['name']
+        print('VAlid')
+        # chech the input signature with the signature in the database
 
-    context = {'imagefile': imagefile,
-               'form': form}
+
+        # if match:
+        #     print('Match')
+        # else:
+        #     print('Not Match')
+        verification = True
+    else:
+        print('Invalid')
+    
+    
+    context = {
+               'form': form,
+               'imagefile': imagefile,
+               'verification': verification
+               }
+
+    return render(request, 'sign/verify.html', context)
+
+
+def upload(request):
+
+    
+    form = ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        print('Valid')
+        form.save()
+
+
+    context = {'form': form}
 
     return render(request, 'sign/upload.html', context)
